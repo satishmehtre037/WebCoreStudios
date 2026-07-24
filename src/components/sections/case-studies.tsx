@@ -1,106 +1,124 @@
 "use client";
 
+import { useState, useRef } from "react";
 import { CASE_STUDIES_DATA } from "@/config/site";
 import { Section, Container, Heading, Card, Tag } from "@/components/ui";
 import { HorizontalScroll } from "@/components/layout";
 import { useScrollReveal } from "@/hooks";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { useUIStore } from "@/store";
+import { CaseStudyItem } from "@/types";
+import { CaseStudyModal } from "./case-study-modal";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function CaseStudies() {
   const { setCursorVariant } = useUIStore();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Reveal for the vertical stack fallback
+  // State for active expanded case study modal
+  const [selectedStudy, setSelectedStudy] = useState<CaseStudyItem | null>(null);
+  const [originRect, setOriginRect] = useState<DOMRect | null>(null);
+
+  // Card element refs for capturing bounding rects
+  const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+
+  // Scroll reveal for cards
   const verticalStackRef = useScrollReveal<HTMLDivElement>({
     type: "fade",
-    stagger: 0.1,
+    stagger: 0.15,
     start: "top 80%",
   });
 
+  const handleCardClick = (study: CaseStudyItem, id: string) => {
+    const cardEl = cardRefs.current.get(id);
+    if (cardEl) {
+      const rect = cardEl.getBoundingClientRect();
+      setOriginRect(rect);
+    }
+    setSelectedStudy(study);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedStudy(null);
+    setOriginRect(null);
+  };
+
   const renderCaseStudyCards = () => {
-    return CASE_STUDIES_DATA.map((study) => {
+    return CASE_STUDIES_DATA.map((rawStudy) => {
+      const study = rawStudy as unknown as CaseStudyItem;
       return (
         <Card
           key={study.id}
+          ref={(el) => {
+            if (el) cardRefs.current.set(study.id, el);
+            else cardRefs.current.delete(study.id);
+          }}
           variant="elevated"
+          onClick={() => handleCardClick(study as CaseStudyItem, study.id)}
           className={cn(
-            "case-study-card flex flex-col lg:flex-row group flex-shrink-0 overflow-hidden",
-            "cursor-none rounded-3xl",
-            // Width/height variations
-            prefersReducedMotion ? "w-full min-h-[500px]" : "w-[85vw] max-w-[1200px] h-[75vh] min-h-[500px]"
+            "case-study-card group flex flex-col justify-between flex-shrink-0 overflow-hidden",
+            "cursor-pointer rounded-3xl border border-border/80 bg-surface/90 hover:border-primary/50 transition-all duration-500",
+            "p-8 md:p-10 select-none relative",
+            prefersReducedMotion
+              ? "w-full min-h-[420px]"
+              : "w-[85vw] max-w-[620px] md:max-w-[700px] h-[550px]"
           )}
-          onMouseEnter={() => setCursorVariant("media")}
+          onMouseEnter={() => setCursorVariant("pointer")}
           onMouseLeave={() => setCursorVariant("default")}
         >
-          {/* Content Area */}
-          <div className="flex flex-col flex-1 p-8 md:p-12 z-10 bg-surface/50 justify-center">
-            <div className="mb-8">
-              <Tag variant="primary" size="sm" className="mb-4">
+          {/* Background Ambient Glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+          {/* Card Top: Category Tag, Year, and Expand Icon */}
+          <div className="flex items-center justify-between z-10">
+            <div className="flex items-center gap-3">
+              <Tag variant="primary" size="sm">
                 {study.category}
               </Tag>
-              <Heading level="h3" className="tracking-tight text-foreground">
-                {study.client}
-              </Heading>
+              {"year" in study && study.year && (
+                <span className="text-overline text-foreground/40">{study.year}</span>
+              )}
             </div>
 
-            {/* The 3 Beats (Problem, Build, Outcome) - Staged via CSS delays or GSAP in future, but simple layout for now */}
-            <div className="flex flex-col gap-6 md:gap-8 mt-4">
-              <div className="reveal-beat">
-                <span className="text-overline text-foreground/40 block mb-2">The Problem</span>
-                <p className="text-body-md text-foreground/80 leading-relaxed">
-                  {study.problem}
-                </p>
-              </div>
-              
-              <div className="reveal-beat">
-                <span className="text-overline text-foreground/40 block mb-2">The Build</span>
-                <p className="text-body-md text-foreground/80 leading-relaxed">
-                  {study.build}
-                </p>
-              </div>
-
-              <div className="reveal-beat">
-                <span className="text-overline text-foreground/40 block mb-2">The Outcome</span>
-                <p className="text-body-md text-foreground/80 leading-relaxed">
-                  {study.outcome}
-                </p>
-              </div>
+            <div className="w-10 h-10 rounded-full bg-surface-elevated border border-border/60 flex items-center justify-center text-foreground/60 group-hover:text-primary group-hover:border-primary/40 group-hover:scale-110 transition-all duration-300">
+              <ArrowUpRight size={18} />
             </div>
           </div>
-          
-          {/* Visual Area (Mockup/Placeholder) */}
-          <div className="flex-1 relative bg-background/50 border-t lg:border-t-0 lg:border-l border-border/50 overflow-hidden min-h-[300px] lg:min-h-full">
-            {study.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img 
-                src={study.image} 
-                alt={`${study.client} project mockup`} 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-            ) : (
-              // Sleek Placeholder
-              <div className="absolute inset-0 flex items-center justify-center p-12">
-                <div className="w-full h-full max-w-md bg-surface border border-border/50 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col transition-transform duration-1000 group-hover:scale-105 group-hover:shadow-glow">
-                  {/* Fake Browser Chrome */}
-                  <div className="h-10 border-b border-border/50 bg-background/50 flex items-center px-4 gap-2 shrink-0">
-                    <div className="w-3 h-3 rounded-full bg-border/50" />
-                    <div className="w-3 h-3 rounded-full bg-border/50" />
-                    <div className="w-3 h-3 rounded-full bg-border/50" />
-                  </div>
-                  {/* Fake Content Lines */}
-                  <div className="flex-1 p-6 flex flex-col gap-4 opacity-20">
-                    <div className="w-3/4 h-8 rounded-lg bg-foreground/20" />
-                    <div className="w-full h-4 rounded bg-foreground/10" />
-                    <div className="w-5/6 h-4 rounded bg-foreground/10" />
-                    <div className="w-full h-32 rounded-xl bg-foreground/10 mt-4" />
-                  </div>
-                  {/* Overlay Glow */}
-                  <div className="absolute inset-0 bg-radial-glow from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                </div>
-              </div>
-            )}
+
+          {/* Card Middle: Title & Tagline / One-liner */}
+          <div className="z-10 my-auto space-y-3">
+            <Heading
+              level="h3"
+              className="text-h3 md:text-h2 tracking-tight text-foreground group-hover:text-primary transition-colors duration-300"
+            >
+              {study.client}
+            </Heading>
+            <p className="text-body-md text-foreground/80 line-clamp-3 leading-relaxed">
+              {study.tagline || study.problem}
+            </p>
+          </div>
+
+          {/* Card Bottom: Quick Preview Metrics or Tech Tags */}
+          <div className="z-10 pt-6 border-t border-border/40 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              {study.tags.slice(0, 3).map((tag) => (
+                <span
+                  key={tag}
+                  className="text-overline text-foreground/50 bg-background/50 px-2.5 py-1 rounded-md border border-border/30"
+                >
+                  {tag}
+                </span>
+              ))}
+              {study.tags.length > 3 && (
+                <span className="text-overline text-foreground/40">
+                  +{study.tags.length - 3} more
+                </span>
+              )}
+            </div>
+            <span className="text-body-sm font-semibold text-primary group-hover:translate-x-1 transition-transform duration-300">
+              View Study &rarr;
+            </span>
           </div>
         </Card>
       );
@@ -108,35 +126,49 @@ export function CaseStudies() {
   };
 
   return (
-    <Section spacing="none" className="bg-surface text-foreground relative z-10">
-      
+    <Section id="work" spacing="none" className="bg-surface text-foreground relative z-10">
       {/* Intro Header */}
       <Container className="pt-24 md:pt-32 pb-8 md:pb-16">
-        <Heading level="h2" className="mb-4">
-          Case Studies.
-        </Heading>
-        <p className="text-body-lg text-foreground-secondary max-w-2xl">
-          Real products built for real businesses. The philosophy in motion.
-        </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <Heading level="h2" className="mb-4">
+              Case Studies & Showcase.
+            </Heading>
+            <p className="text-body-lg text-foreground-secondary max-w-2xl">
+              Real software systems engineered for ambitious teams. Tap any project to explore the complete architecture and metrics.
+            </p>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2 text-overline text-foreground/40">
+            <span>Scroll or drag horizontally</span>
+            <div className="w-12 h-px bg-border" />
+          </div>
+        </div>
       </Container>
 
       {/* Case Studies Showcase */}
       {prefersReducedMotion ? (
         <Container>
-          <div ref={verticalStackRef} className="flex flex-col gap-16 pb-24 md:pb-32">
+          <div ref={verticalStackRef} className="flex flex-col gap-8 pb-24 md:pb-32">
             {renderCaseStudyCards()}
           </div>
         </Container>
       ) : (
         <HorizontalScroll speed={1} className="bg-surface">
-          <div className="flex gap-6 md:gap-12 px-6 md:px-12 h-full items-center">
+          <div className="flex gap-6 md:gap-8 px-6 md:px-12 h-full items-center">
             {renderCaseStudyCards()}
-            {/* Spacer at the end so the last card doesn't stick to the edge */}
+            {/* End spacer */}
             <div className="w-[10vw] flex-shrink-0" />
           </div>
         </HorizontalScroll>
       )}
 
+      {/* Shared Element Case Study Modal */}
+      <CaseStudyModal
+        study={selectedStudy}
+        originRect={originRect}
+        onClose={handleCloseModal}
+      />
     </Section>
   );
 }

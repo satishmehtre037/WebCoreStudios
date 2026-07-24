@@ -35,6 +35,22 @@ export type ProjectCategory =
   | "mobile"
   | "internal-tool";
 
+export interface CaseStudyItem {
+  id: string;
+  client: string;
+  category: string;
+  tagline: string;
+  problem: string;
+  build: string;
+  outcome: string;
+  metrics?: readonly { label: string; value: string }[];
+  tags: readonly string[];
+  image: string | null;
+  heroImage?: string | null;
+  year?: string;
+  link?: string;
+}
+
 /* ── Service ────────────────────────────────────────────────── */
 export interface Service {
   id: string;
