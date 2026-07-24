@@ -1,2 +1,2 @@
-export { Button, ButtonBackground, ButtonLabel, ButtonArrow } from "./cta-button";
+export { Button, ButtonBackground, ButtonText, ButtonArrow } from "./cta-button";
 export type { ButtonProps } from "./cta-button";

@@ -10,11 +10,14 @@ export interface ButtonArrowProps {
 }
 
 export const ButtonArrow = forwardRef<HTMLSpanElement, ButtonArrowProps>(
-  ({ size = 16, className }, ref) => {
+  ({ size = 18, className }, ref) => {
     return (
       <span
         ref={ref}
-        className={cn("relative z-10 inline-flex items-center justify-center shrink-0 transition-transform", className)}
+        className={cn(
+          "relative z-10 inline-flex items-center justify-center shrink-0 text-[#FFF9EB] will-change-transform transform-gpu",
+          className
+        )}
       >
         <ArrowRight size={size} />
       </span>

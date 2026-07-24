@@ -4,28 +4,27 @@ import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 export interface ButtonBackgroundProps {
-  variant?: "primary" | "secondary" | "outline" | "ghost";
   className?: string;
 }
 
 export const ButtonBackground = forwardRef<HTMLDivElement, ButtonBackgroundProps>(
-  ({ variant = "primary", className }, ref) => {
+  ({ className }, ref) => {
     return (
       <div
-        ref={ref}
         aria-hidden="true"
         className={cn(
-          "absolute inset-0 pointer-events-none overflow-hidden rounded-full transition-colors duration-300",
+          "absolute inset-0 pointer-events-none overflow-hidden rounded-full bg-[#5D0D18]",
           className
         )}
       >
-        {/* Glossy Liquid Glass Sweep Highlight Layer */}
+        {/* Layer 2: Lighter Bloodstone Hover Layer with Integrated Glossy Highlight Sweep */}
         <div
+          ref={ref}
           className={cn(
-            "absolute top-0 bottom-0 -left-1/2 w-[120%] pointer-events-none opacity-0",
-            "bg-[linear-gradient(115deg,transparent_0%,rgba(255,249,235,0.32)_50%,transparent_100%)]",
-            "blur-[2px]"
+            "absolute inset-0 w-full h-full pointer-events-none rounded-full will-change-transform transform-gpu",
+            "bg-[linear-gradient(115deg,#7A1222_0%,#8A1426_70%,rgba(255,249,235,0.38)_88%,#7A1222_100%)]"
           )}
+          style={{ transform: "translateX(-105%)" }}
         />
       </div>
     );

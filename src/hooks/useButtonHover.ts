@@ -2,22 +2,20 @@
 
 import { useEffect, useRef } from "react";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { createButtonHoverTimeline, ButtonElements } from "@/animations/buttonHoverTimeline";
+import { createButtonHoverAnimations, ButtonElements } from "@/animations/buttonHoverTimeline";
 
 export interface UseButtonHoverOptions {
-  variant?: "primary" | "secondary" | "outline" | "ghost";
   disabled?: boolean;
 }
 
 export function useButtonHover<T extends HTMLElement = HTMLButtonElement>(
   options: UseButtonHoverOptions = {}
 ) {
-  const { variant = "primary", disabled = false } = options;
+  const { disabled = false } = options;
   const buttonRef = useRef<T | null>(null);
-  const sweepRef = useRef<HTMLDivElement | null>(null);
-  const labelRef = useRef<HTMLSpanElement | null>(null);
+  const hoverLayerRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLSpanElement | null>(null);
   const arrowRef = useRef<HTMLSpanElement | null>(null);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -27,23 +25,21 @@ export function useButtonHover<T extends HTMLElement = HTMLButtonElement>(
 
     const elements: ButtonElements = {
       button,
-      sweepLayer: sweepRef.current!,
-      label: labelRef.current,
+      hoverLayer: hoverLayerRef.current!,
+      text: textRef.current,
       arrow: arrowRef.current,
     };
 
-    const tl = createButtonHoverTimeline(elements, {
+    const anims = createButtonHoverAnimations(elements, {
       reducedMotion: prefersReducedMotion,
-      variant,
     });
-    timelineRef.current = tl;
 
     const handleMouseEnter = () => {
-      tl.play();
+      anims.playEnter();
     };
 
     const handleMouseLeave = () => {
-      tl.reverse();
+      anims.playLeave();
     };
 
     button.addEventListener("mouseenter", handleMouseEnter);
@@ -52,14 +48,14 @@ export function useButtonHover<T extends HTMLElement = HTMLButtonElement>(
     return () => {
       button.removeEventListener("mouseenter", handleMouseEnter);
       button.removeEventListener("mouseleave", handleMouseLeave);
-      tl.kill();
+      anims.kill();
     };
-  }, [variant, disabled, prefersReducedMotion]);
+  }, [disabled, prefersReducedMotion]);
 
   return {
     buttonRef,
-    sweepRef,
-    labelRef,
+    hoverLayerRef,
+    textRef,
     arrowRef,
   };
 }
