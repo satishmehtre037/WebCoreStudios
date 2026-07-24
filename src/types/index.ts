@@ -51,6 +51,25 @@ export interface CaseStudyItem {
   link?: string;
 }
 
+export interface PinnedProjectItem {
+  id: string;
+  title: string;
+  category: string;
+  status: "live" | "in-development" | "coming-soon";
+  description: string;
+  tags: readonly string[];
+  keyFeatures: readonly string[];
+  desktopPreview?: string | null;
+  mobilePreview?: string | null;
+  overview: string;
+  techStack: readonly string[];
+  timeline: string;
+  challenges: string;
+  results: string;
+  liveUrl: string;
+  githubUrl?: string;
+}
+
 /* ── Service ────────────────────────────────────────────────── */
 export interface Service {
   id: string;
