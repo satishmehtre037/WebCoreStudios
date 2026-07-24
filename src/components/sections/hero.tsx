@@ -1,0 +1,219 @@
+"use client";
+
+import { useRef, useState, useEffect } from "react";
+import { useUIStore } from "@/store";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect";
+import { gsap, ScrollTrigger, EASE } from "@/lib/gsap";
+import { WebGLCanvas, SceneCamera, Particles, SceneGrid, SceneLights } from "@/components/three";
+import { Section, Container, Heading, Button, MagneticButton } from "@/components/ui";
+import { ArrowRight, ChevronDown } from "lucide-react";
+
+export function Hero() {
+  const { isLoading, setCursorVariant } = useUIStore();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const { width } = useWindowSize();
+  const isMobile = width ? width < 768 : false;
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subheadRef = useRef<HTMLParagraphElement>(null);
+  const actionsRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+
+  // Mount flag for Three.js to prevent hydration mismatch
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
+  useIsomorphicLayoutEffect(() => {
+    // Wait until global loading is finished before playing entrance animation
+    if (isLoading) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.2 });
+
+      if (prefersReducedMotion) {
+        tl.to([headlineRef.current, subheadRef.current, actionsRef.current, indicatorRef.current], {
+          opacity: 1,
+          duration: 1,
+          stagger: 0.1,
+          ease: EASE.smooth,
+        });
+      } else {
+        // Headline text reveal (blur to focus, upward motion)
+        if (headlineRef.current) {
+          const words = headlineRef.current.querySelectorAll(".word");
+          tl.fromTo(
+            words,
+            { opacity: 0, y: 30, filter: "blur(8px)" },
+            {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 1.2,
+              stagger: 0.08,
+              ease: "power3.out",
+            }
+          );
+        }
+
+        // Sub-headline fade and slide up
+        tl.fromTo(
+          subheadRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+          "-=0.6"
+        );
+
+        // Actions fade in
+        tl.fromTo(
+          actionsRef.current,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.4"
+        );
+
+        // Scroll indicator fade in
+        tl.fromTo(
+          indicatorRef.current,
+          { opacity: 0, y: -10 },
+          { opacity: 0.5, y: 0, duration: 1, ease: "power2.out" },
+          "-=0.2"
+        );
+
+        // Continuous subtle bounce for scroll indicator
+        const arrow = indicatorRef.current?.querySelector(".indicator-arrow");
+        if (arrow) {
+          gsap.to(arrow, {
+            y: 6,
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
+      }
+
+      // Parallax Exit on Scroll
+      if (sectionRef.current) {
+        gsap.to(
+          [headlineRef.current, subheadRef.current, actionsRef.current, indicatorRef.current],
+          {
+            y: -100,
+            opacity: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [isLoading, prefersReducedMotion]);
+
+  // Wrap headline words for animation
+  const headlineText = "We engineer premium digital products, not just websites.";
+  const headlineWords = headlineText.split(" ").map((word, i) => (
+    <span key={i} className="word inline-block opacity-0">
+      {word}&nbsp;
+    </span>
+  ));
+
+  return (
+    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground pt-20">
+      
+      {/* Three.js Background Scene — ambient, not dominant */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
+        {isMounted && (
+          <WebGLCanvas fullscreen fov={45} cameraPosition={[0, 1.5, 6]}>
+            <SceneCamera enableParallax={!prefersReducedMotion && !isMobile} parallaxStrength={0.15} position={[0, 1, 6]} />
+            <SceneLights ambientIntensity={0.15} pointLightIntensity={0.5} />
+            <Particles count={isMobile ? 80 : 200} speed={0.0002} size={0.015} opacity={0.2} color="#9FB2AC" />
+            <SceneGrid fadeDistance={isMobile ? 15 : 25} cellColor="#2A060C" sectionColor="#3B0812" position={[0, -1, 0]} />
+          </WebGLCanvas>
+        )}
+      </div>
+
+      <Container className="relative z-10 flex flex-col items-start md:items-start text-left md:text-left">
+        {/* Brand Tag */}
+        <span 
+          className="text-accent text-caption tracking-widest uppercase mb-6 opacity-0"
+          style={{ animation: !isLoading ? "fadeIn 1s ease forwards 0.2s" : "none" }}
+        >
+          WebCore Studios
+        </span>
+
+        {/* Headline */}
+        <Heading 
+          ref={headlineRef}
+          level="display" 
+          tone="default"
+          className="max-w-[18ch] leading-[1.05] mb-8"
+        >
+          {prefersReducedMotion ? (
+            <span className="opacity-0">{headlineText}</span>
+          ) : (
+            headlineWords
+          )}
+        </Heading>
+
+        {/* Sub-headline */}
+        <p 
+          ref={subheadRef}
+          className="text-body-lg text-foreground-secondary max-w-xl mb-14 opacity-0"
+        >
+          Bridging the gap between high-end aesthetic design and enterprise-grade software architecture.
+        </p>
+
+        {/* Actions */}
+        <div ref={actionsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0">
+          <MagneticButton>
+            <Button 
+              variant="primary" 
+              size="lg" 
+              className="w-full sm:w-auto"
+              onMouseEnter={() => setCursorVariant("pointer")}
+              onMouseLeave={() => setCursorVariant("default")}
+            >
+              View Our Work
+            </Button>
+          </MagneticButton>
+          <MagneticButton>
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              className="w-full sm:w-auto group text-foreground-secondary hover:text-foreground"
+              onMouseEnter={() => setCursorVariant("pointer")}
+              onMouseLeave={() => setCursorVariant("default")}
+            >
+              Start a Project
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+          </MagneticButton>
+        </div>
+      </Container>
+
+      {/* Scroll Indicator */}
+      <div 
+        ref={indicatorRef} 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground-secondary opacity-0"
+      >
+        <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
+        <ChevronDown size={16} className="indicator-arrow" />
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </Section>
+  );
+}
