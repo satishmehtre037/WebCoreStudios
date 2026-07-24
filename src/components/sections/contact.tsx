@@ -8,9 +8,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect"
 import { useUIStore } from "@/store";
 import { gsap, EASE } from "@/lib/gsap";
 import { WebGLCanvas, SceneCamera, Particles, SceneGrid } from "@/components/three";
-import { Section, Container, Heading, MagneticButton } from "@/components/ui";
-import { buttonVariants } from "@/components/ui/button";
-import { ArrowUpRight } from "lucide-react";
+import { Section, Container, Heading, Button } from "@/components/ui";
 
 export function Contact() {
   const { setCursorVariant } = useUIStore();
@@ -116,41 +114,37 @@ export function Contact() {
 
         {/* Direct Contact Options */}
         <div ref={actionsRef} className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0">
-          <MagneticButton strength={0.3}>
-            <a 
-              href={`mailto:${CONTACT_DATA.email}`}
-              className={buttonVariants({ variant: "primary", size: "lg", className: "w-full sm:w-auto" })}
-              onMouseEnter={() => setCursorVariant("pointer")}
-              onMouseLeave={() => setCursorVariant("default")}
-            >
-              Email Us
-            </a>
-          </MagneticButton>
+          <Button 
+            variant="primary" 
+            size="lg" 
+            showArrow
+            onClick={() => window.location.href = `mailto:${CONTACT_DATA.email}`}
+            onMouseEnter={() => setCursorVariant("pointer")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            Email Us
+          </Button>
 
-          <MagneticButton strength={0.2}>
-            <a 
-              href={`https://wa.me/${CONTACT_DATA.whatsapp.replace(/\D/g, '')}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={buttonVariants({ variant: "ghost", size: "lg", className: "w-full sm:w-auto group text-foreground-secondary hover:text-foreground border border-border/50 hover:border-border" })}
-              onMouseEnter={() => setCursorVariant("pointer")}
-              onMouseLeave={() => setCursorVariant("default")}
-            >
-              WhatsApp
-              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ml-1" />
-            </a>
-          </MagneticButton>
+          <Button 
+            variant="secondary" 
+            size="lg" 
+            showArrow
+            onClick={() => window.open(`https://wa.me/${CONTACT_DATA.whatsapp.replace(/\D/g, '')}`, "_blank", "noopener,noreferrer")}
+            onMouseEnter={() => setCursorVariant("pointer")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            WhatsApp
+          </Button>
 
-          <MagneticButton strength={0.2}>
-            <a 
-              href={`tel:${CONTACT_DATA.phone.replace(/\D/g, '')}`}
-              className={buttonVariants({ variant: "ghost", size: "lg", className: "w-full sm:w-auto group text-foreground-secondary hover:text-foreground" })}
-              onMouseEnter={() => setCursorVariant("pointer")}
-              onMouseLeave={() => setCursorVariant("default")}
-            >
-              Call Us
-            </a>
-          </MagneticButton>
+          <Button 
+            variant="ghost" 
+            size="lg" 
+            onClick={() => window.location.href = `tel:${CONTACT_DATA.phone.replace(/\D/g, '')}`}
+            onMouseEnter={() => setCursorVariant("pointer")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            Call Us
+          </Button>
         </div>
       </Container>
     </Section>

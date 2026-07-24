@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Container, Button, Logo, MagneticButton } from "@/components/ui";
+import { Container, Button, Logo } from "@/components/ui";
 import { navigation, siteConfig } from "@/config/site";
 import { useUIStore } from "@/store";
 import { useNavbarScroll } from "@/hooks/navbar/useNavbarScroll";
@@ -97,17 +97,15 @@ export function Navbar() {
 
             {/* CTA */}
             <div className="hidden md:block">
-              <MagneticButton strength={0.1}>
-                <Button 
-                  variant="primary" 
-                  size="sm"
-                  className="rounded-full shadow-[0_0_15px_rgba(93,13,24,0.4)]"
-                  onMouseEnter={() => setCursorVariant("pointer")}
-                  onMouseLeave={() => setCursorVariant("default")}
-                >
-                  Start a Project
-                </Button>
-              </MagneticButton>
+              <Button 
+                variant="primary" 
+                size="sm"
+                className="rounded-full shadow-[0_0_15px_rgba(93,13,24,0.4)]"
+                onMouseEnter={() => setCursorVariant("pointer")}
+                onMouseLeave={() => setCursorVariant("default")}
+              >
+                Start a Project
+              </Button>
             </div>
 
             {/* Mobile toggle */}

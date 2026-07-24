@@ -7,7 +7,7 @@ import { useWindowSize } from "@/hooks/use-window-size";
 import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect";
 import { gsap, EASE } from "@/lib/gsap";
 import { WebGLCanvas, SceneCamera, Particles, SceneGrid, SceneLights } from "@/components/three";
-import { Section, Container, Heading, Button, MagneticButton } from "@/components/ui";
+import { Section, Container, Heading, Button } from "@/components/ui";
 import { ArrowRight } from "lucide-react";
 
 export function Hero() {
@@ -134,29 +134,26 @@ export function Hero() {
 
         {/* Actions */}
         <div ref={actionsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0">
-          <MagneticButton>
-            <Button 
-              variant="primary" 
-              size="lg" 
-              className="w-full sm:w-auto"
-              onMouseEnter={() => setCursorVariant("pointer")}
-              onMouseLeave={() => setCursorVariant("default")}
-            >
-              View Our Work
-            </Button>
-          </MagneticButton>
-          <MagneticButton>
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              className="w-full sm:w-auto group text-foreground-secondary hover:text-foreground"
-              onMouseEnter={() => setCursorVariant("pointer")}
-              onMouseLeave={() => setCursorVariant("default")}
-            >
-              Start a Project
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
-          </MagneticButton>
+          <Button 
+            variant="primary" 
+            size="lg" 
+            showArrow
+            className="w-full sm:w-auto"
+            onMouseEnter={() => setCursorVariant("pointer")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            View Our Work
+          </Button>
+          <Button 
+            variant="ghost" 
+            size="lg" 
+            showArrow
+            className="w-full sm:w-auto text-foreground-secondary hover:text-foreground"
+            onMouseEnter={() => setCursorVariant("pointer")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            Start a Project
+          </Button>
         </div>
       </Container>
 

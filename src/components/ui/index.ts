@@ -1,4 +1,4 @@
-export { Button, buttonVariants } from "./button";
+export { Button } from "./button";
 export { Heading, headingVariants } from "./heading";
 export { Container, containerVariants } from "./container";
 export { Section, sectionVariants } from "./section";
@@ -8,5 +8,4 @@ export { Tag, tagVariants, Pill, pillVariants } from "./tag";
 export { Grid, gridVariants } from "./grid";
 export { Modal } from "./modal";
 export { Timeline } from "./timeline";
-export { MagneticButton } from "./magnetic-button";
 export { Logo } from "./logo";
