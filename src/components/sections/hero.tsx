@@ -5,10 +5,10 @@ import { useUIStore } from "@/store";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect";
-import { gsap, ScrollTrigger, EASE } from "@/lib/gsap";
+import { gsap, EASE } from "@/lib/gsap";
 import { WebGLCanvas, SceneCamera, Particles, SceneGrid, SceneLights } from "@/components/three";
 import { Section, Container, Heading, Button, MagneticButton } from "@/components/ui";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   const { isLoading, setCursorVariant } = useUIStore();
@@ -20,7 +20,6 @@ export function Hero() {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadRef = useRef<HTMLParagraphElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
-  const indicatorRef = useRef<HTMLDivElement>(null);
 
   // Mount flag for Three.js to prevent hydration mismatch
   const [isMounted, setIsMounted] = useState(false);
@@ -34,7 +33,7 @@ export function Hero() {
       const tl = gsap.timeline({ delay: 0.2 });
 
       if (prefersReducedMotion) {
-        tl.to([headlineRef.current, subheadRef.current, actionsRef.current, indicatorRef.current], {
+        tl.to([headlineRef.current, subheadRef.current, actionsRef.current], {
           opacity: 1,
           duration: 1,
           stagger: 0.1,
@@ -73,44 +72,6 @@ export function Hero() {
           { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
           "-=0.4"
         );
-
-        // Scroll indicator fade in
-        tl.fromTo(
-          indicatorRef.current,
-          { opacity: 0, y: -10 },
-          { opacity: 0.5, y: 0, duration: 1, ease: "power2.out" },
-          "-=0.2"
-        );
-
-        // Continuous subtle bounce for scroll indicator
-        const arrow = indicatorRef.current?.querySelector(".indicator-arrow");
-        if (arrow) {
-          gsap.to(arrow, {
-            y: 6,
-            duration: 1.5,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-        }
-      }
-
-      // Parallax Exit on Scroll
-      if (sectionRef.current) {
-        gsap.to(
-          [headlineRef.current, subheadRef.current, actionsRef.current, indicatorRef.current],
-          {
-            y: -100,
-            opacity: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
       }
     }, sectionRef);
 
@@ -126,7 +87,7 @@ export function Hero() {
   ));
 
   return (
-    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground pt-20">
+    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground pt-12 pb-16">
       
       {/* Three.js Background Scene — ambient, not dominant */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
@@ -140,7 +101,7 @@ export function Hero() {
         )}
       </div>
 
-      <Container className="relative z-10 flex flex-col items-start md:items-start text-left md:text-left">
+      <Container className="relative z-10 flex flex-col items-start md:items-start text-left md:text-left -mt-12 md:-mt-16">
         {/* Brand Tag */}
         <span 
           className="text-accent text-caption tracking-widest uppercase mb-6 opacity-0"
@@ -198,15 +159,6 @@ export function Hero() {
           </MagneticButton>
         </div>
       </Container>
-
-      {/* Scroll Indicator */}
-      <div 
-        ref={indicatorRef} 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground-secondary opacity-0"
-      >
-        <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
-        <ChevronDown size={16} className="indicator-arrow" />
-      </div>
 
       <style jsx>{`
         @keyframes fadeIn {
