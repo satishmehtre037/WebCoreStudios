@@ -171,7 +171,7 @@ export function CaseStudyModal({ study, originRect, onClose }: CaseStudyModalPro
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-background/80 backdrop-blur-md overflow-hidden"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-background/80 backdrop-blur-md overflow-hidden"
     >
       {/* Backdrop click area */}
       <div
@@ -184,13 +184,13 @@ export function CaseStudyModal({ study, originRect, onClose }: CaseStudyModalPro
       <div
         ref={cardMorphRef}
         className={cn(
-          "relative w-full max-w-[1100px] h-[85vh] max-h-[850px]",
-          "bg-surface border border-border shadow-2xl rounded-3xl",
+          "relative w-full max-w-[1100px] h-[94dvh] max-h-[850px]",
+          "bg-surface border border-border shadow-2xl rounded-2xl sm:rounded-3xl",
           "flex flex-col overflow-hidden z-10"
         )}
       >
         {/* Top Sticky Bar with Category & Close Action */}
-        <div className="flex items-center justify-between px-6 md:px-10 py-5 border-b border-border/50 bg-surface/80 backdrop-blur-md shrink-0 z-20">
+        <div className="flex items-center justify-between px-4 sm:px-6 md:px-10 py-3.5 sm:py-5 border-b border-border/50 bg-surface/80 backdrop-blur-md shrink-0 z-20">
           <div className="flex items-center gap-3">
             <Tag variant="primary" size="sm">
               {study.category}
@@ -214,14 +214,14 @@ export function CaseStudyModal({ study, originRect, onClose }: CaseStudyModalPro
         {/* Scrollable Expanded Case Study Body */}
         <div
           ref={contentRef}
-          className="flex-1 overflow-y-auto p-6 md:p-12 space-y-12 text-foreground scrollbar-thin"
+          className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 space-y-8 sm:space-y-12 text-foreground scrollbar-thin"
         >
           {/* Header & Tagline */}
-          <div className="space-y-4 max-w-3xl">
-            <Heading level="h1" className="text-h1 tracking-tight text-foreground">
+          <div className="space-y-2 sm:space-y-4 max-w-3xl">
+            <Heading level="h1" className="text-h3 sm:text-h2 md:text-h1 tracking-tight text-foreground">
               {study.client}
             </Heading>
-            <p className="text-body-lg text-primary/90 font-medium leading-relaxed">
+            <p className="text-body-md sm:text-body-lg text-primary/90 font-medium leading-relaxed">
               {study.tagline}
             </p>
           </div>

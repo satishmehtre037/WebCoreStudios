@@ -87,7 +87,7 @@ export function Hero() {
   ));
 
   return (
-    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground pt-12 pb-16">
+    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground pt-28 sm:pt-32 md:pt-36 pb-16 md:pb-24">
       
       {/* Three.js Background Scene — ambient, not dominant */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
@@ -101,10 +101,10 @@ export function Hero() {
         )}
       </div>
 
-      <Container className="relative z-10 flex flex-col items-start md:items-start text-left md:text-left -mt-12 md:-mt-16">
+      <Container className="relative z-10 flex flex-col items-start md:items-start text-left md:text-left mt-0 md:-mt-12">
         {/* Brand Tag */}
         <span 
-          className="text-accent text-caption tracking-widest uppercase mb-6 opacity-0"
+          className="text-accent text-caption tracking-widest uppercase mb-4 sm:mb-6 opacity-0"
           style={{ animation: !isLoading ? "fadeIn 1s ease forwards 0.2s" : "none" }}
         >
           WebCore Studios
@@ -115,7 +115,7 @@ export function Hero() {
           ref={headlineRef}
           level="display" 
           tone="default"
-          className="max-w-[18ch] leading-[1.05] mb-8"
+          className="max-w-[18ch] leading-[1.05] mb-6 sm:mb-8 text-[2.25rem] sm:text-[3.5rem] md:text-display"
         >
           {prefersReducedMotion ? (
             <span className="opacity-0">{headlineText}</span>
@@ -127,18 +127,18 @@ export function Hero() {
         {/* Sub-headline */}
         <p 
           ref={subheadRef}
-          className="text-body-lg text-foreground-secondary max-w-xl mb-14 opacity-0"
+          className="text-body-md sm:text-body-lg text-foreground-secondary max-w-xl mb-10 sm:mb-14 opacity-0"
         >
           Bridging the gap between high-end aesthetic design and enterprise-grade software architecture.
         </p>
 
         {/* Actions */}
-        <div ref={actionsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0">
+        <div ref={actionsRef} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-4 opacity-0 w-full sm:w-auto">
           <Button 
             variant="primary" 
             size="lg" 
             showArrow
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto justify-center"
             onMouseEnter={() => setCursorVariant("pointer")}
             onMouseLeave={() => setCursorVariant("default")}
           >
@@ -148,7 +148,7 @@ export function Hero() {
             variant="ghost" 
             size="lg" 
             showArrow
-            className="w-full sm:w-auto text-foreground-secondary hover:text-foreground"
+            className="w-full sm:w-auto justify-center text-foreground-secondary hover:text-foreground"
             onMouseEnter={() => setCursorVariant("pointer")}
             onMouseLeave={() => setCursorVariant("default")}
           >

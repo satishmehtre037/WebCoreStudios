@@ -22,6 +22,7 @@ export function PinnedSection({ children, className, pinDuration = "+=100%" }: P
 
   useIsomorphicLayoutEffect(() => {
     if (prefersReducedMotion || !containerRef.current || !pinRef.current) return;
+    if (window.innerWidth < 768) return; // Allow natural scrolling on mobile screens
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -38,7 +39,7 @@ export function PinnedSection({ children, className, pinDuration = "+=100%" }: P
 
   return (
     <div ref={containerRef} className={cn("relative w-full", className)}>
-      <div ref={pinRef} className="w-full h-screen">
+      <div ref={pinRef} className="w-full min-h-svh flex flex-col justify-center py-16 md:py-0">
         {children}
       </div>
     </div>

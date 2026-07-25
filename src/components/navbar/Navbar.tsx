@@ -34,28 +34,28 @@ export function Navbar() {
     <>
       <header
         ref={navbarRef}
-        className="fixed top-0 left-0 right-0 pt-6 px-4 md:px-8 transition-all duration-500 ease-out"
+        className="fixed top-0 left-0 right-0 pt-3 sm:pt-6 px-3 sm:px-4 md:px-8 transition-all duration-500 ease-out"
         style={{ zIndex: "var(--z-navbar)" as unknown as number }}
         onMouseLeave={() => setActiveDropdown(null)}
       >
         <div 
           ref={innerRef}
-          className="max-w-7xl mx-auto rounded-[2rem] bg-[#170406]/60 backdrop-blur-md border border-white/10 shadow-2xl relative"
+          className="max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] bg-[#170406]/75 backdrop-blur-md border border-white/10 shadow-2xl relative"
           style={{ backgroundImage: 'url("/noise.png")', backgroundSize: '100px 100px', backgroundBlendMode: 'overlay' }}
         >
-          <div className="px-6 py-4 flex items-center justify-between">
+          <div className="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 text-foreground transition-colors hover:text-accent group"
+              className="flex items-center gap-2.5 sm:gap-3 text-foreground transition-colors hover:text-accent group"
               onClick={closeMenu}
               onMouseEnter={() => handleLogoHover(true)}
               onMouseLeave={() => handleLogoHover(false)}
             >
-              <div className="navbar-logo w-8 h-8 text-foreground group-hover:text-accent transition-colors duration-300">
+              <div className="navbar-logo w-7 h-7 sm:w-8 sm:h-8 text-foreground group-hover:text-accent transition-colors duration-300 shrink-0">
                 <Logo strokeWidth={2} />
               </div>
-              <span className="text-body-sm font-bold tracking-tight hidden lg:block">{siteConfig.name}</span>
+              <span className="text-body-sm font-bold tracking-tight text-foreground">{siteConfig.name}</span>
             </Link>
 
             {/* Desktop Navigation */}

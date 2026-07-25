@@ -103,7 +103,7 @@ export function Contact() {
           ref={headlineRef}
           level="display" 
           tone="default"
-          className="max-w-[15ch] leading-[1.05] mb-12 lg:mb-16"
+          className="max-w-[15ch] leading-[1.05] mb-10 sm:mb-12 lg:mb-16 text-[2.25rem] sm:text-[3.5rem] md:text-display"
         >
           {prefersReducedMotion ? (
             <span className="opacity-0">{CONTACT_DATA.headline}</span>
@@ -113,11 +113,12 @@ export function Contact() {
         </Heading>
 
         {/* Direct Contact Options */}
-        <div ref={actionsRef} className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0">
+        <div ref={actionsRef} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 opacity-0 w-full sm:w-auto">
           <Button 
             variant="primary" 
             size="lg" 
             showArrow
+            className="w-full sm:w-auto justify-center"
             onClick={() => window.location.href = `mailto:${CONTACT_DATA.email}`}
             onMouseEnter={() => setCursorVariant("pointer")}
             onMouseLeave={() => setCursorVariant("default")}
@@ -129,6 +130,7 @@ export function Contact() {
             variant="secondary" 
             size="lg" 
             showArrow
+            className="w-full sm:w-auto justify-center"
             onClick={() => window.open(`https://wa.me/${CONTACT_DATA.whatsapp.replace(/\D/g, '')}`, "_blank", "noopener,noreferrer")}
             onMouseEnter={() => setCursorVariant("pointer")}
             onMouseLeave={() => setCursorVariant("default")}
@@ -139,6 +141,7 @@ export function Contact() {
           <Button 
             variant="ghost" 
             size="lg" 
+            className="w-full sm:w-auto justify-center"
             onClick={() => window.location.href = `tel:${CONTACT_DATA.phone.replace(/\D/g, '')}`}
             onMouseEnter={() => setCursorVariant("pointer")}
             onMouseLeave={() => setCursorVariant("default")}

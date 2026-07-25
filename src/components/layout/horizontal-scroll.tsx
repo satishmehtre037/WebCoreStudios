@@ -38,8 +38,8 @@ export function HorizontalScroll({ children, className, speed = 1 }: HorizontalS
   }, [children]);
 
   useIsomorphicLayoutEffect(() => {
-    // If reduced motion or small screen width, we fallback to native vertical stacking/scrolling
-    if (prefersReducedMotion || scrollWidth <= window.innerWidth) return;
+    // If reduced motion or small screen width (< 768px), fallback to native swipe scrolling
+    if (prefersReducedMotion || scrollWidth <= window.innerWidth || window.innerWidth < 768) return;
 
     const ctx = gsap.context(() => {
       const scrollDistance = scrollWidth - window.innerWidth;
@@ -50,10 +50,10 @@ export function HorizontalScroll({ children, className, speed = 1 }: HorizontalS
         scrollTrigger: {
           trigger: containerRef.current,
           pin: true,
-          scrub: 1, // slight smoothing on scrub
+          scrub: 1,
           start: "top top",
           end: () => `+=${scrollDistance * speed}`,
-          invalidateOnRefresh: true, // Recalculates on resize
+          invalidateOnRefresh: true,
         },
       });
     }, containerRef);
@@ -70,10 +70,10 @@ export function HorizontalScroll({ children, className, speed = 1 }: HorizontalS
   }
 
   return (
-    <div ref={containerRef} className={cn("relative w-full h-screen overflow-hidden", className)}>
+    <div ref={containerRef} className={cn("relative w-full h-auto md:h-screen overflow-x-auto md:overflow-hidden pb-8 md:pb-0", className)}>
       <div 
         ref={scrollContainerRef} 
-        className="absolute top-0 left-0 h-full flex items-center will-change-transform"
+        className="relative md:absolute top-0 left-0 h-auto md:h-full flex items-center will-change-transform overflow-x-auto md:overflow-visible pb-4 md:pb-0 scrollbar-none"
       >
         {children}
       </div>

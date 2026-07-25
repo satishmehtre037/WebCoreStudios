@@ -40,11 +40,11 @@ export function MobileMenu({ activeSection }: { activeSection: string }) {
   return (
     <div
       ref={menuRef}
-      className="fixed inset-0 bg-[#0D0D0D]/95 backdrop-blur-2xl md:hidden opacity-0 pointer-events-none flex flex-col justify-center"
-      style={{ zIndex: (Number("var(--z-navbar)") || 99) - 1 }}
+      className="fixed inset-0 bg-[#170406]/98 backdrop-blur-2xl md:hidden opacity-0 pointer-events-none flex flex-col justify-between pt-24 pb-12 overflow-y-auto"
+      style={{ zIndex: 90 }}
     >
-      <Container>
-        <nav className="flex flex-col items-start gap-8">
+      <Container className="my-auto">
+        <nav className="flex flex-col items-start gap-6 sm:gap-8">
           {navigation.main.map((item) => {
             const isActive = activeSection === item.href;
             return (
@@ -52,17 +52,18 @@ export function MobileMenu({ activeSection }: { activeSection: string }) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "mobile-nav-link text-h2 font-bold transition-colors",
+                  "mobile-nav-link text-h2 font-bold transition-colors py-1 flex items-center gap-3",
                   isActive ? "text-accent" : "text-foreground hover:text-accent"
                 )}
                 onClick={closeMenu}
               >
+                {isActive && <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />}
                 {item.label}
               </Link>
             );
           })}
-          <div className="mobile-nav-link mt-8 w-full">
-            <Button variant="primary" size="lg" className="w-full justify-center" onClick={closeMenu}>
+          <div className="mobile-nav-link mt-6 w-full pt-4 border-t border-white/10">
+            <Button variant="primary" size="lg" className="w-full justify-center shadow-lg" onClick={closeMenu}>
               Start a Project
             </Button>
           </div>

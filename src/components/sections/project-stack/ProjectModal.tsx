@@ -79,7 +79,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-background/85 backdrop-blur-lg overflow-hidden"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-background/85 backdrop-blur-lg overflow-hidden"
     >
       {/* Backdrop area click */}
       <div className="absolute inset-0 cursor-pointer" onClick={handleClose} aria-hidden="true" />
@@ -88,18 +88,18 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       <div
         ref={cardRef}
         className={cn(
-          "relative w-full max-w-[1140px] h-[90vh] max-h-[900px]",
-          "bg-surface border border-border/80 shadow-2xl rounded-3xl",
+          "relative w-full max-w-[1140px] h-[94dvh] max-h-[900px]",
+          "bg-surface border border-border/80 shadow-2xl rounded-2xl sm:rounded-3xl",
           "flex flex-col overflow-hidden z-10"
         )}
       >
         {/* Modal Top Header Bar */}
-        <div className="flex items-center justify-between px-6 md:px-10 py-5 border-b border-border/50 bg-surface/90 backdrop-blur-md shrink-0 z-20">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between px-4 sm:px-6 md:px-10 py-3.5 sm:py-5 border-b border-border/50 bg-surface/90 backdrop-blur-md shrink-0 z-20">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <Tag variant="primary" size="sm">
               {project.category}
             </Tag>
-            <span className="text-overline text-emerald-400 font-mono flex items-center gap-1.5">
+            <span className="text-overline text-emerald-400 font-mono flex items-center gap-1.5 text-[0.65rem] sm:text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               LIVE SYSTEM PREVIEW
             </span>
@@ -117,13 +117,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         {/* Scrollable Modal Content */}
-        <div className="flex-1 overflow-y-auto p-6 md:p-12 space-y-12 text-foreground scrollbar-thin">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 space-y-8 sm:space-y-12 text-foreground scrollbar-thin">
           {/* Header Title & Tagline */}
-          <div className="space-y-3 max-w-3xl">
-            <Heading level="h1" className="text-h1 tracking-tight text-foreground">
+          <div className="space-y-2 sm:space-y-3 max-w-3xl">
+            <Heading level="h1" className="text-h3 sm:text-h2 md:text-h1 tracking-tight text-foreground">
               {project.title}
             </Heading>
-            <p className="text-body-lg text-primary font-medium leading-relaxed">
+            <p className="text-body-md sm:text-body-lg text-primary font-medium leading-relaxed">
               {project.description}
             </p>
           </div>

@@ -58,11 +58,11 @@ export function CaseStudies() {
           onClick={() => handleCardClick(study as CaseStudyItem, study.id)}
           className={cn(
             "case-study-card group flex flex-col justify-between flex-shrink-0 overflow-hidden",
-            "cursor-pointer rounded-3xl border border-border/80 bg-surface/90 hover:border-primary/50 transition-all duration-500",
-            "p-8 md:p-10 select-none relative",
+            "cursor-pointer rounded-2xl sm:rounded-3xl border border-border/80 bg-surface/90 hover:border-primary/50 transition-all duration-500",
+            "p-6 sm:p-8 md:p-10 select-none relative",
             prefersReducedMotion
-              ? "w-full min-h-[420px]"
-              : "w-[85vw] max-w-[620px] md:max-w-[700px] h-[550px]"
+              ? "w-full min-h-[380px]"
+              : "w-[88vw] sm:w-[420px] md:max-w-[700px] h-auto min-h-[380px] md:h-[550px]"
           )}
           onMouseEnter={() => setCursorVariant("pointer")}
           onMouseLeave={() => setCursorVariant("default")}
@@ -81,43 +81,43 @@ export function CaseStudies() {
               )}
             </div>
 
-            <div className="w-10 h-10 rounded-full bg-surface-elevated border border-border/60 flex items-center justify-center text-foreground/60 group-hover:text-primary group-hover:border-primary/40 group-hover:scale-110 transition-all duration-300">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-surface-elevated border border-border/60 flex items-center justify-center text-foreground/60 group-hover:text-primary group-hover:border-primary/40 group-hover:scale-110 transition-all duration-300">
               <ArrowUpRight size={18} />
             </div>
           </div>
 
           {/* Card Middle: Title & Tagline / One-liner */}
-          <div className="z-10 my-auto space-y-3">
+          <div className="z-10 my-4 sm:my-auto space-y-2 sm:space-y-3">
             <Heading
               level="h3"
-              className="text-h3 md:text-h2 tracking-tight text-foreground group-hover:text-primary transition-colors duration-300"
+              className="text-h3 sm:text-h2 tracking-tight text-foreground group-hover:text-primary transition-colors duration-300"
             >
               {study.client}
             </Heading>
-            <p className="text-body-md text-foreground/80 line-clamp-3 leading-relaxed">
+            <p className="text-body-sm sm:text-body-md text-foreground/80 line-clamp-3 leading-relaxed">
               {study.tagline || study.problem}
             </p>
           </div>
 
           {/* Card Bottom: Quick Preview Metrics or Tech Tags */}
-          <div className="z-10 pt-6 border-t border-border/40 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 flex-wrap">
+          <div className="z-10 pt-4 sm:pt-6 border-t border-border/40 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {study.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-overline text-foreground/50 bg-background/50 px-2.5 py-1 rounded-md border border-border/30"
+                  className="text-overline text-foreground/50 bg-background/50 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-border/30 text-[0.65rem] sm:text-xs"
                 >
                   {tag}
                 </span>
               ))}
               {study.tags.length > 3 && (
-                <span className="text-overline text-foreground/40">
-                  +{study.tags.length - 3} more
+                <span className="text-overline text-foreground/40 text-[0.65rem] sm:text-xs">
+                  +{study.tags.length - 3}
                 </span>
               )}
             </div>
-            <span className="text-body-sm font-semibold text-primary group-hover:translate-x-1 transition-transform duration-300">
-              View Study &rarr;
+            <span className="text-body-xs sm:text-body-sm font-semibold text-primary group-hover:translate-x-1 transition-transform duration-300 shrink-0">
+              View &rarr;
             </span>
           </div>
         </Card>
@@ -128,13 +128,13 @@ export function CaseStudies() {
   return (
     <Section id="work" spacing="none" className="bg-surface text-foreground relative z-10">
       {/* Intro Header */}
-      <Container className="pt-24 md:pt-32 pb-8 md:pb-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <Container className="pt-20 sm:pt-24 md:pt-32 pb-6 sm:pb-8 md:pb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
           <div>
-            <Heading level="h2" className="mb-4">
+            <Heading level="h2" className="mb-2 sm:mb-4">
               Case Studies & Showcase.
             </Heading>
-            <p className="text-body-lg text-foreground-secondary max-w-2xl">
+            <p className="text-body-md sm:text-body-lg text-foreground-secondary max-w-2xl">
               Real software systems engineered for ambitious teams. Tap any project to explore the complete architecture and metrics.
             </p>
           </div>

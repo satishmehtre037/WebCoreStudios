@@ -24,6 +24,7 @@ export function ProjectStack() {
 
   useIsomorphicLayoutEffect(() => {
     if (prefersReducedMotion || !containerRef.current || !cardsWrapperRef.current) return;
+    if (window.innerWidth < 768) return; // Allow natural scrolling on mobile
 
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
     if (cards.length === 0) return;
@@ -70,7 +71,7 @@ export function ProjectStack() {
           opacity: 1,
           scale: 1,
           duration: 1,
-          ease: "none", // Linear scrubbing for smooth control
+          ease: "none",
         });
 
         // Scale down & slightly dim previous card beneath
@@ -84,7 +85,7 @@ export function ProjectStack() {
               duration: 1,
               ease: "none",
             },
-            "<" // Run simultaneously with card slide
+            "<"
           );
         }
       });
@@ -98,7 +99,6 @@ export function ProjectStack() {
   };
 
   const handleViewCaseStudy = (project: PinnedProjectItem) => {
-    // Smooth scroll down to case studies or open modal
     const workSection = document.getElementById("work");
     if (workSection) {
       workSection.scrollIntoView({ behavior: "smooth" });
@@ -111,15 +111,15 @@ export function ProjectStack() {
       spacing="none"
       className="bg-background text-foreground relative z-20 overflow-hidden"
     >
-      <div ref={containerRef} className="w-full min-h-screen flex flex-col justify-between py-12 md:py-16">
+      <div ref={containerRef} className="w-full min-h-[auto] md:min-h-screen flex flex-col justify-between py-12 md:py-16">
         {/* Section Header */}
         <Container className="shrink-0 z-30">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/40">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 pb-6 border-b border-border/40">
             <div>
               <Heading level="h2" className="mb-2">
                 Flagship Operating Engines.
               </Heading>
-              <p className="text-body-lg text-foreground-secondary max-w-2xl">
+              <p className="text-body-md sm:text-body-lg text-foreground-secondary max-w-2xl">
                 Stacked software products built for scale, speed, and immediate operational impact.
               </p>
             </div>
@@ -128,16 +128,16 @@ export function ProjectStack() {
             <ScrollTimeline
               total={PINNED_PROJECTS_DATA.length}
               activeIndex={activeIndex}
-              className="shrink-0"
+              className="shrink-0 hidden md:flex"
             />
           </div>
         </Container>
 
         {/* Stacked Floating Cards Container */}
-        <Container className="flex-1 relative flex items-center justify-center my-auto py-8">
+        <Container className="flex-1 relative flex items-center justify-center my-auto py-6 md:py-8">
           <div
             ref={cardsWrapperRef}
-            className="relative w-full max-w-[1240px] h-[580px] md:h-[620px] flex items-center justify-center"
+            className="relative w-full max-w-[1240px] flex flex-col md:block h-auto md:h-[620px] gap-6 md:gap-0"
           >
             {PINNED_PROJECTS_DATA.map((project, index) => (
               <div
@@ -145,7 +145,7 @@ export function ProjectStack() {
                 ref={(el) => {
                   cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 w-full h-full flex items-center justify-center"
+                className="relative md:absolute inset-0 w-full h-auto md:h-full flex items-center justify-center"
                 onMouseEnter={() => setCursorVariant("card")}
                 onMouseLeave={() => setCursorVariant("default")}
               >
