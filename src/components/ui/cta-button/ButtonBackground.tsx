@@ -13,16 +13,16 @@ export const ButtonBackground = forwardRef<HTMLDivElement, ButtonBackgroundProps
       <div
         aria-hidden="true"
         className={cn(
-          "absolute inset-0 pointer-events-none overflow-hidden rounded-full bg-[#5D0D18]",
+          "absolute inset-0 pointer-events-none overflow-hidden rounded-full bg-primary",
           className
         )}
       >
-        {/* Layer 2: Lighter Bloodstone Hover Layer with Integrated Glossy Highlight Sweep */}
+        {/* Layer 2: Lighter Terracotta Hover Layer with Integrated Glossy Highlight Sweep */}
         <div
           ref={ref}
           className={cn(
             "absolute inset-0 w-full h-full pointer-events-none rounded-full will-change-transform transform-gpu",
-            "bg-[linear-gradient(115deg,#7A1222_0%,#8A1426_70%,rgba(255,249,235,0.38)_88%,#7A1222_100%)]"
+            "bg-[linear-gradient(115deg,rgb(var(--primary))_0%,#D35D3B_70%,rgba(253,245,230,0.38)_88%,rgb(var(--primary))_100%)]"
           )}
           style={{ transform: "translateX(-105%)" }}
         />

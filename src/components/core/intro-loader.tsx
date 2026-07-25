@@ -48,7 +48,7 @@ export function IntroLoader() {
         .to(containerRef.current, { opacity: 0, duration: 0.5, ease: EASE.smooth });
     } else {
       // SCENE 01: Pure black, silence, subtle film grain
-      // CSS bg-[#170406] (Wine Black) starts opacity 1
+      // CSS bg-background (Dark Oxblood) starts opacity 1
       tl.to(noiseRef.current, { opacity: 0.05, duration: 0.5, ease: "none" }, 0);
       tl.to(threeRef.current, { opacity: 0.2, duration: 1.0, ease: "power1.inOut" }, 0.2); // Tiny floating particles
 
@@ -65,10 +65,10 @@ export function IntroLoader() {
       tl.to([".logo-tile", ".logo-mark"], { strokeDashoffset: 0, duration: 1.0, stagger: 0.1, ease: "power2.inOut" }, 1.2);
 
       // SCENE 06: Logo settles, small glow and glossy tile fill
-      tl.to(".logo-tile", { fill: "#5D0D18", duration: 0.5, ease: EASE.smooth }, 2.0);
-      tl.to(".logo-mark", { stroke: "#FFF9EB", duration: 0.5, ease: EASE.smooth }, 2.0);
+      tl.to(".logo-tile", { fill: "#C1502F", duration: 0.5, ease: EASE.smooth }, 2.0);
+      tl.to(".logo-mark", { stroke: "#FDF5E6", duration: 0.5, ease: EASE.smooth }, 2.0);
       tl.to(logoWrapperRef.current, { 
-        boxShadow: "inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 4px 15px rgba(93,13,24,0.4)",
+        boxShadow: "inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 4px 15px rgba(193,80,47,0.4)",
         duration: 0.8 
       }, 2.0);
 
@@ -134,7 +134,7 @@ export function IntroLoader() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 flex flex-col items-center justify-center bg-[#170406] text-foreground overflow-hidden"
+      className="fixed inset-0 flex flex-col items-center justify-center bg-background text-foreground overflow-hidden"
       style={{ zIndex: 9999 }}
     >
       {/* Film Grain Noise Overlay */}
@@ -148,7 +148,7 @@ export function IntroLoader() {
       <div
         ref={gradientRef}
         className="absolute inset-0 opacity-0 scale-90 pointer-events-none"
-        style={{ background: "radial-gradient(circle at center, rgba(93,13,24,0.3) 0%, transparent 60%)" }}
+        style={{ background: "radial-gradient(circle at center, rgba(193,80,47,0.3) 0%, transparent 60%)" }}
       />
 
       {/* SVG Blueprint & Nodes */}
@@ -158,24 +158,24 @@ export function IntroLoader() {
         viewBox="0 0 100 100" 
         preserveAspectRatio="none"
       >
-        <path className="blueprint-line" d="M 20 0 L 20 100" stroke="#9FB2AC" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
-        <path className="blueprint-line" d="M 80 0 L 80 100" stroke="#9FB2AC" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
-        <path className="blueprint-line" d="M 0 30 L 100 30" stroke="#9FB2AC" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
-        <path className="blueprint-line" d="M 0 70 L 100 70" stroke="#9FB2AC" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
+        <path className="blueprint-line" d="M 20 0 L 20 100" stroke="#C1502F" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
+        <path className="blueprint-line" d="M 80 0 L 80 100" stroke="#C1502F" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
+        <path className="blueprint-line" d="M 0 30 L 100 30" stroke="#C1502F" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
+        <path className="blueprint-line" d="M 0 70 L 100 70" stroke="#C1502F" strokeWidth="0.1" fill="none" strokeDasharray="100" strokeDashoffset="100" />
         
-        <circle className="blueprint-node opacity-0" cx="20" cy="30" r="0.4" fill="#5D0D18" />
-        <circle className="blueprint-node opacity-0" cx="80" cy="30" r="0.4" fill="#5D0D18" />
-        <circle className="blueprint-node opacity-0" cx="20" cy="70" r="0.4" fill="#5D0D18" />
-        <circle className="blueprint-node opacity-0" cx="80" cy="70" r="0.4" fill="#5D0D18" />
+        <circle className="blueprint-node opacity-0" cx="20" cy="30" r="0.4" fill="#C1502F" />
+        <circle className="blueprint-node opacity-0" cx="80" cy="30" r="0.4" fill="#C1502F" />
+        <circle className="blueprint-node opacity-0" cx="20" cy="70" r="0.4" fill="#C1502F" />
+        <circle className="blueprint-node opacity-0" cx="80" cy="70" r="0.4" fill="#C1502F" />
       </svg>
 
       {/* Three.js Layer (Particles & Grid) */}
       <div ref={threeRef} className="absolute inset-0 opacity-0 pointer-events-none">
         <WebGLCanvas fullscreen fov={50} cameraPosition={[0, 2, 6]}>
           <SceneCamera enableParallax={false} position={[0, 1, 5]} />
-          <Particles count={150} speed={0.0001} size={0.012} opacity={0.2} color="#FFF9EB" />
-          <SceneGrid fadeDistance={20} cellColor="#2A060C" sectionColor="#3B0812" position={[0, -1, 0]} />
-          <WireframeTorus radius={3} tube={0.1} segments={64} color="#3B0812" rotationSpeed={0.001} position={[0, 0, -2]} />
+          <Particles count={150} speed={0.0001} size={0.012} opacity={0.2} color="#FDF5E6" />
+          <SceneGrid fadeDistance={20} cellColor="#351414" sectionColor="#4A1D1D" position={[0, -1, 0]} />
+          <WireframeTorus radius={3} tube={0.1} segments={64} color="#4A1D1D" rotationSpeed={0.001} position={[0, 0, -2]} />
         </WebGLCanvas>
       </div>
 

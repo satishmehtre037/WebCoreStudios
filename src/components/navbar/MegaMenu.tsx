@@ -43,7 +43,7 @@ export function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
   return (
     <div 
       ref={dropdownRef}
-      className="absolute top-full left-0 mt-4 w-[600px] max-w-[90vw] overflow-hidden rounded-2xl bg-[#170406]/80 backdrop-blur-xl border border-white/10 shadow-2xl origin-top"
+      className="absolute top-full left-0 mt-4 w-[600px] max-w-[90vw] overflow-hidden rounded-2xl bg-surface/90 backdrop-blur-xl border border-white/10 shadow-2xl origin-top"
       onMouseLeave={onClose}
     >
       <div 

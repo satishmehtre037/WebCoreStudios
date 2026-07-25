@@ -18,7 +18,7 @@ interface WireframeSphereProps {
 export function WireframeSphere({
   radius = 1,
   segments = 24,
-  color = "#5D0D18",
+  color = "#C1502F",
   rotationSpeed = 0.001,
   position = [0, 0, 0],
 }: WireframeSphereProps) {
@@ -54,7 +54,7 @@ export function WireframeTorus({
   radius = 1.5,
   tube = 0.4,
   segments = 32,
-  color = "#9FB2AC",
+  color = "#C1502F",
   rotationSpeed = 0.002,
   position = [0, 0, 0],
 }: WireframeTorusProps) {

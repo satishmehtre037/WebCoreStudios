@@ -87,7 +87,7 @@ export function Hero() {
   ));
 
   return (
-    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground pt-28 sm:pt-32 md:pt-36 pb-16 md:pb-24">
+    <Section ref={sectionRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-background text-foreground pt-28 sm:pt-32 md:pt-36 pb-16 md:pb-24">
       
       {/* Three.js Background Scene — ambient, not dominant */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-30">
@@ -95,8 +95,8 @@ export function Hero() {
           <WebGLCanvas fullscreen fov={45} cameraPosition={[0, 1.5, 6]}>
             <SceneCamera enableParallax={!prefersReducedMotion && !isMobile} parallaxStrength={0.15} position={[0, 1, 6]} />
             <SceneLights ambientIntensity={0.15} pointLightIntensity={0.5} />
-            <Particles count={isMobile ? 80 : 200} speed={0.0002} size={0.015} opacity={0.2} color="#9FB2AC" />
-            <SceneGrid fadeDistance={isMobile ? 15 : 25} cellColor="#2A060C" sectionColor="#3B0812" position={[0, -1, 0]} />
+            <Particles count={isMobile ? 80 : 200} speed={0.0002} size={0.015} opacity={0.2} color="#C1502F" />
+            <SceneGrid fadeDistance={isMobile ? 15 : 25} cellColor="#351414" sectionColor="#4A1D1D" position={[0, -1, 0]} />
           </WebGLCanvas>
         )}
       </div>

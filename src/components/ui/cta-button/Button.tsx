@@ -47,8 +47,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         className={cn(
           "relative inline-flex items-center justify-center gap-3 font-medium cursor-pointer select-none overflow-hidden",
-          "h-[56px] px-8 rounded-full border border-white/[0.08] text-[#FFF9EB]",
-          "shadow-[0_4px_14px_rgba(93,13,24,0.35)]",
+          "h-[56px] px-8 rounded-full border border-white/[0.08] text-foreground",
+          "shadow-[0_4px_14px_rgba(193,80,47,0.35)]",
           "will-change-transform transform-gpu",
           disabled && "opacity-50 cursor-not-allowed pointer-events-none",
           className

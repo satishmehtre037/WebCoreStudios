@@ -30,7 +30,7 @@ export function SceneLights({
       <pointLight
         intensity={pointLightIntensity}
         position={pointLightPosition}
-        color="#9FB2AC"
+        color="#C1502F"
       />
     </>
   );

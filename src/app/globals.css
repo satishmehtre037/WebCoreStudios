@@ -5,29 +5,28 @@
    Semantic Design Tokens, Typography Scale, Spacing, Shadows
    ============================================================ */
 
-/* ── Palette ────────────────────────────────────────────────── */
+/* ── Palette — Oxblood Heritage ──────────────────────────────── */
 :root {
   /* Raw palette — never reference these directly in components */
-  --raw-bloodstone: 93 13 24;
-  --raw-dark-wine: 59 8 18;
-  --raw-wine-black: 23 4 6;
-  --raw-vanilla-custard: 255 249 235;
-  --raw-misty-sage: 159 178 172;
-  --raw-graphite: 29 29 29;
-  --raw-white: 255 255 255;
+  --raw-dark-oxblood: 53 20 20;       /* #351414 - Deepest background */
+  --raw-burgundy-wine: 74 29 29;      /* #4A1D1D - Surfaces & cards */
+  --raw-burnt-terracotta: 193 80 47;  /* #C1502F - Confident accent & CTAs */
+  --raw-old-lace: 253 245 230;        /* #FDF5E6 - High contrast text */
+  --raw-graphite: 29 29 29;           /* #1D1D1D - Neutral support */
+  --raw-white: 255 255 255;           /* #FFFFFF - Neutral support */
 
   /* ── Semantic Tokens ──────────────────────────────────────── */
-  --background: var(--raw-wine-black);
-  --surface: var(--raw-graphite);
-  --surface-elevated: 35 35 35;
-  --primary: var(--raw-bloodstone);
-  --secondary: var(--raw-dark-wine);
-  --accent: var(--raw-misty-sage);
-  --muted: 120 120 120;
-  --foreground: var(--raw-vanilla-custard);
-  --foreground-secondary: var(--raw-misty-sage);
-  --border: 45 45 45;
-  --ring: var(--raw-bloodstone);
+  --background: var(--raw-dark-oxblood);
+  --surface: var(--raw-burgundy-wine);
+  --surface-elevated: 90 35 35;
+  --primary: var(--raw-burnt-terracotta);
+  --secondary: var(--raw-burgundy-wine);
+  --accent: var(--raw-burnt-terracotta);
+  --muted: 135 60 50;
+  --foreground: var(--raw-old-lace);
+  --foreground-secondary: 235 215 195;
+  --border: 90 38 38;
+  --ring: var(--raw-burnt-terracotta);
 
   /* ── Typography ───────────────────────────────────────────── */
   --font-heading: var(--font-geist-sans), system-ui, -apple-system, sans-serif;

@@ -14,7 +14,7 @@ export const ButtonText = forwardRef<HTMLSpanElement, ButtonTextProps>(
       <span
         ref={ref}
         className={cn(
-          "relative z-10 font-sans font-medium tracking-wide text-[#FFF9EB] text-body-md inline-flex items-center gap-2 will-change-transform transform-gpu",
+          "relative z-10 font-sans font-medium tracking-wide text-foreground text-body-md inline-flex items-center gap-2 will-change-transform transform-gpu",
           className
         )}
       >

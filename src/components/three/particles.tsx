@@ -19,7 +19,7 @@ interface ParticlesProps {
 export function Particles({
   count = 500,
   size = 0.02,
-  color = "#9FB2AC",
+  color = "#C1502F",
   spread = 10,
   speed = 0.0005,
   opacity = 0.6,

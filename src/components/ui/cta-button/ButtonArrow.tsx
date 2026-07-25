@@ -15,7 +15,7 @@ export const ButtonArrow = forwardRef<HTMLSpanElement, ButtonArrowProps>(
       <span
         ref={ref}
         className={cn(
-          "relative z-10 inline-flex items-center justify-center shrink-0 text-[#FFF9EB] will-change-transform transform-gpu",
+          "relative z-10 inline-flex items-center justify-center shrink-0 text-foreground will-change-transform transform-gpu",
           className
         )}
       >

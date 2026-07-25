@@ -50,7 +50,7 @@ export function PageTransitionProvider({ children }: WithChildren) {
       {/* Transition overlay */}
       <div
         ref={overlayRef}
-        className="pointer-events-none fixed inset-0 origin-bottom bg-[#0D0D0D]"
+        className="pointer-events-none fixed inset-0 origin-bottom bg-background"
         style={{
           zIndex: "var(--z-overlay)" as unknown as number,
           transform: "scaleY(0)",

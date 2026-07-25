@@ -14,7 +14,7 @@ export function WhoWeAre() {
   });
 
   return (
-    <PinnedSection pinDuration="+=100%" className="bg-primary text-[#FFF9EB]">
+    <PinnedSection pinDuration="+=100%" className="bg-surface text-foreground">
       <Section id="about" spacing="none" className="h-full flex items-center py-16 md:py-0">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative">
@@ -23,7 +23,7 @@ export function WhoWeAre() {
             <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-white/20 overflow-hidden">
               {/* Animated fill line */}
               <div 
-                className="w-full bg-white absolute top-0 left-0"
+                className="w-full bg-accent absolute top-0 left-0"
                 style={{ height: "100%", transformOrigin: "top", animation: "drawDown 2s ease-out forwards" }}
               />
             </div>
@@ -33,13 +33,13 @@ export function WhoWeAre() {
               className="col-span-1 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3"
             >
               {/* Punchy Statement */}
-              <Heading level="h2" className="mb-6 sm:mb-10 text-[#FFF9EB]">
+              <Heading level="h2" className="mb-6 sm:mb-10 text-foreground">
                 <span className="line sm:block inline-block mr-1.5">We engineer software</span>
                 <span className="line sm:block inline-block">systems, not websites.</span>
               </Heading>
 
               {/* Thesis Paragraph */}
-              <div className="text-body-md sm:text-body-lg lg:text-h5 font-medium text-[#FFF9EB]/90 leading-relaxed mb-8 sm:mb-12">
+              <div className="text-body-md sm:text-body-lg lg:text-h5 font-medium text-foreground/90 leading-relaxed mb-8 sm:mb-12">
                 <span className="line sm:block inline-block mr-1.5">WebCore builds reusable, proven software</span>
                 <span className="line sm:block inline-block mr-1.5">engines and configures them per client.</span>
                 <span className="line sm:block inline-block mr-1.5">We don&apos;t start from a blank page; we start</span>
@@ -47,7 +47,7 @@ export function WhoWeAre() {
               </div>
 
               {/* Transition Line */}
-              <div className="text-body-sm sm:text-body-md uppercase tracking-widest text-[#FFF9EB]/70 font-semibold">
+              <div className="text-body-sm sm:text-body-md uppercase tracking-widest text-foreground-secondary font-semibold">
                 <span className="line block">Welcome to the studio.</span>
               </div>
             </div>

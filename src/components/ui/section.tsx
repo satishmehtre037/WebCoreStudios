@@ -15,7 +15,7 @@ const sectionVariants = cva("relative w-full", {
       default: "bg-background",
       surface: "bg-surface",
       primary: "bg-primary",
-      dark: "bg-[rgb(var(--raw-wine-black))]",
+      dark: "bg-background",
     },
   },
   defaultVariants: {

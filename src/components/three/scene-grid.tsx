@@ -25,8 +25,8 @@ export function SceneGrid({
   sectionThickness = 1,
   fadeDistance = 30,
   fadeStrength = 1,
-  cellColor = "#1D1D1D",
-  sectionColor = "#5D0D18",
+  cellColor = "#351414",
+  sectionColor = "#4A1D1D",
   position = [0, -1, 0],
   infiniteGrid = true,
 }: SceneGridProps) {

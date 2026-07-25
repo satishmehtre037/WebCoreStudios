@@ -82,7 +82,7 @@ export function Contact() {
     <Section 
       id="contact" 
       ref={sectionRef} 
-      className="relative min-h-[80svh] flex items-center justify-center overflow-hidden bg-[rgb(var(--raw-wine-black))] text-foreground"
+      className="relative min-h-[80svh] flex items-center justify-center overflow-hidden bg-background text-foreground"
     >
       {/* Three.js Background Scene - Quiet echo of the loading/hero sequence */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
@@ -90,8 +90,8 @@ export function Contact() {
           <WebGLCanvas fullscreen fov={45} cameraPosition={[0, 1.5, 6]}>
             <SceneCamera enableParallax={!prefersReducedMotion && !isMobile} parallaxStrength={0.1} position={[0, 1, 6]} />
             {/* Slower, subtler particles for the closing chapter */}
-            <Particles count={isMobile ? 60 : 150} speed={0.00015} size={0.012} opacity={0.15} color="#9FB2AC" />
-            <SceneGrid fadeDistance={isMobile ? 15 : 25} cellColor="#2A060C" sectionColor="#3B0812" position={[0, -1, 0]} />
+            <Particles count={isMobile ? 60 : 150} speed={0.00015} size={0.012} opacity={0.15} color="#C1502F" />
+            <SceneGrid fadeDistance={isMobile ? 15 : 25} cellColor="#351414" sectionColor="#4A1D1D" position={[0, -1, 0]} />
           </WebGLCanvas>
         )}
       </div>

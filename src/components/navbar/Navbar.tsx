@@ -40,7 +40,7 @@ export function Navbar() {
       >
         <div 
           ref={innerRef}
-          className="max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] bg-[#170406]/75 backdrop-blur-md border border-white/10 shadow-2xl relative"
+          className="max-w-7xl mx-auto rounded-[1.5rem] sm:rounded-[2rem] bg-background/80 backdrop-blur-md border border-white/10 shadow-2xl relative"
           style={{ backgroundImage: 'url("/noise.png")', backgroundSize: '100px 100px', backgroundBlendMode: 'overlay' }}
         >
           <div className="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">

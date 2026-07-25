@@ -7,9 +7,9 @@ import * as THREE from "three";
  * Import and reuse across any Three.js scene.
  */
 export const materials = {
-  /** Bloodstone red glass-like material */
-  bloodstone: new THREE.MeshPhysicalMaterial({
-    color: "#5D0D18",
+  /** Burnt Terracotta accent glass-like material */
+  terracotta: new THREE.MeshPhysicalMaterial({
+    color: "#C1502F",
     metalness: 0.2,
     roughness: 0.1,
     transmission: 0.9,
@@ -18,16 +18,16 @@ export const materials = {
     opacity: 0.8,
   }),
 
-  /** Dark wine opaque material */
-  darkWine: new THREE.MeshStandardMaterial({
-    color: "#3B0812",
+  /** Burgundy wine opaque material */
+  burgundy: new THREE.MeshStandardMaterial({
+    color: "#4A1D1D",
     metalness: 0.4,
     roughness: 0.6,
   }),
 
-  /** Misty sage accent material */
-  sage: new THREE.MeshStandardMaterial({
-    color: "#9FB2AC",
+  /** Burnt terracotta accent material */
+  accent: new THREE.MeshStandardMaterial({
+    color: "#C1502F",
     metalness: 0.1,
     roughness: 0.3,
   }),
@@ -39,12 +39,12 @@ export const materials = {
     roughness: 0.8,
   }),
 
-  /** Vanilla custard bright material */
-  custard: new THREE.MeshStandardMaterial({
-    color: "#FFF9EB",
+  /** Old Lace bright material */
+  oldLace: new THREE.MeshStandardMaterial({
+    color: "#FDF5E6",
     metalness: 0.0,
     roughness: 0.4,
-    emissive: "#FFF9EB",
+    emissive: "#FDF5E6",
     emissiveIntensity: 0.05,
   }),
 
@@ -60,7 +60,7 @@ export const materials = {
 
   /** Wireframe base */
   wireframe: new THREE.MeshBasicMaterial({
-    color: "#5D0D18",
+    color: "#C1502F",
     wireframe: true,
     transparent: true,
     opacity: 0.3,

@@ -45,8 +45,8 @@ export function NavItem({ label, href, isActive, hasDropdown, onMouseEnter, onCl
 
   const activePill = isActive && (
     <div 
-      className="absolute inset-0 bg-[#5D0D18]/40 border border-[#5D0D18]/60 rounded-full -z-10"
-      style={{ boxShadow: "0 0 10px rgba(93, 13, 24, 0.2)" }}
+      className="absolute inset-0 bg-accent/20 border border-accent/40 rounded-full -z-10"
+      style={{ boxShadow: "0 0 10px rgb(var(--accent) / 0.2)" }}
     />
   );
 

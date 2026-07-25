@@ -40,7 +40,7 @@ export function MobileMenu({ activeSection }: { activeSection: string }) {
   return (
     <div
       ref={menuRef}
-      className="fixed inset-0 bg-[#170406]/98 backdrop-blur-2xl md:hidden opacity-0 pointer-events-none flex flex-col justify-between pt-24 pb-12 overflow-y-auto"
+      className="fixed inset-0 bg-background/98 backdrop-blur-2xl md:hidden opacity-0 pointer-events-none flex flex-col justify-between pt-24 pb-12 overflow-y-auto"
       style={{ zIndex: 90 }}
     >
       <Container className="my-auto">
